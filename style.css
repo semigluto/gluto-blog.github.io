@@ -8,20 +8,6 @@ body {
     background-color: #4B7C99;
 }
 
-#bigbox {
-    width: 1000px;
-    margin: 0 auto;
-}
-
-#banner {
-    width: 1000px;
-    font-size: 0px;
-}
-
-#banner img {
-    width: 1000px;
-}
-
 nav {
     background-color: #CCD0D9;
     width: 1000px;
@@ -41,7 +27,7 @@ nav a:hover {
     color: #1a9be6;
 }
 
-.dangqian {
+.index {
     color: #1a9be6;
 
 }
