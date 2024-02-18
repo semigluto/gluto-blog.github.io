@@ -10,7 +10,6 @@ body {
 
 nav {
     background-color: #CCD0D9;
-    width: 1000px;
     height: 60px;
 }
 
@@ -34,8 +33,6 @@ nav a:hover {
 
 #main {
     height: 490px;
-    width: 1000px;
-    margin: 0 auto;
     background-color: #86aacb;
 }
 
@@ -94,7 +91,6 @@ h2 {
 
 #luxing {
     background-color: #86aacb;
-    width: 1000px;
 }
 
 #luxing div {
