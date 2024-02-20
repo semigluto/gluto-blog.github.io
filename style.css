@@ -30,6 +30,7 @@ li a:hover:not(.active){
   background-color: #4CAF50;
 }
 
-.blog{
-  blog-radius: 5px;
+blog{
+  border: 3px solid black;
+  border-radius: 5px;
 }
