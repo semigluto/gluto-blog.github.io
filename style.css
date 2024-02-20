@@ -1,13 +1,13 @@
 .nav{
+  margin: -8;
+  padding: 14;
   overflow: hidden;
-  background-color: #555;
-  text-align: center;
+  background-color: #888;
 }
 
 .nav a{
-  float: left;
-  display: block;
+  display: inline;
+  padding: 14px;
   color: #ffffff;
-  padding: 16px 16px;
   text-decoration: none;
 }
