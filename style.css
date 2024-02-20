@@ -1,13 +1,16 @@
 .nav{
-  margin: -8;
   padding: 14;
+  padding-left: 0;
   overflow: hidden;
-  background-color: #888;
 }
 
 .nav a{
   display: inline;
+  margin: -1.94;
   padding: 14px;
-  color: #ffffff;
+  padding-top: 18.9;
+  padding-bottom: 17;
+  color: #000000;
   text-decoration: none;
 }
+
