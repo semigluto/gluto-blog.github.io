@@ -2,19 +2,30 @@ body{
   background-color: #A2D5F7;
 }
 
-.nav{
-  padding: 14;
-  padding-left: 0;
+ul{
+  list-style-type: none;
+  margin:0;
+  padding:0;
   overflow: hidden;
+  background-color: #333;
 }
 
-.nav a{
-  display: inline;
-  margin: -1.94;
-  padding: 14px;
-  padding-top: 18.9;
-  padding-bottom: 17;
-  color: #000000;
+li{
+  float: left;
+}
+
+li a{
+  display: block;
+  color: white;
+  test-align: center;
+  padding: 14px 16px;
   text-decoration: none;
 }
 
+li a:hover:not(.active){
+  background-color: #111;
+}
+
+.active{
+  background-color: #4CAF50;
+}
