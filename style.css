@@ -33,8 +33,13 @@ li a:hover:not(.active){
   background-color: #4CAF50;
 }
 
-.post{
+.postlist{
   float: center;
+}
+
+.post{
+  margin: 20px;
+  background-color: #AAA;
   border: 1px solid black;
   border-radius: 5px;
 }
