@@ -1,5 +1,6 @@
 body{
   margin: 0;
+  background-color: #F9F5E9;
 }
 
 ul{
@@ -10,7 +11,7 @@ ul{
   margin:0;
   padding:0;
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: #A5A5A5;
 }
 
 li{
@@ -26,20 +27,21 @@ li a{
 }
 
 li a:hover:not(.active){
-  background-color: #f3f3f3;
+  background-color: #A1A1A1;
 }
 
 .active{
-  background-color: #4CAF50;
+  background-color: #87CEEB;
 }
 
 .postlist{
+  margin-top: 80px;
   float: center;
 }
 
 .post{
-  margin: 20px;
-  background-color: #AAA;
-  border: 1px solid black;
+  margin: 40px;
+  background-color: #FFF;
+  border: 0;
   border-radius: 5px;
 }
