@@ -7,9 +7,10 @@
   <script src="particle.js"></script>
 </head>
 
-<!--bgparticle-->
+<!--bakground particle-->
 <script src="js/jquery-2.1.1.min.js"></script> 
 <script src="js/particle-1.1.min.js"></script> 
+<script>
 $(document).ready(function(){
     $('.myElement').Yoshi({
         num_particles:100,
@@ -43,19 +44,20 @@ $(document).ready(function(){
         control_point_b_y:true
     });
 });
+</script>
 
 <body>
-  <!--背景粒子效果-->
-  <div id="particles-js"></div>
-  <!--导航栏-->
+  <!--navigation bar-->
   <ul>
     <li><a class="active" href="semigluto.github.io">主页</a></li>
     <li><a href="#news">博客</a></li>
     <li style="float:right"><a href="#contact">日志</a></li>
     <li style="float:right"><a href="#about">联系</a></li>
   </ul>
-  <article class=".blog">
-    <h1>Title<h1>
-    <p>Detail..........e....rr.wd.d..w..w.c</p>
-  </article>
+  <article class=".post">
+    <header>
+      <h1>Title<h1>
+      <p>Detail..........e....rr.wd.d..w..w.c</p>
+    </header>
+      </article>
 </body>
