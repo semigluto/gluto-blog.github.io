@@ -52,6 +52,11 @@ li a:hover:not(.active){
   background-color: FFF;
 }
 
+.icon{
+  border: 3px solid black;
+  border-radius: 100px;
+}
+
 .rightmain{
   float: left;
   padding: 5%;
