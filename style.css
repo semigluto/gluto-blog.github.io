@@ -43,5 +43,10 @@ li a:hover:not(.active){
   margin: 30px;
   background-color: #FFF;
   border: 0;
-  border-radius: 5px;
+  border-radius: 10px;
+}
+
+.postinfo{
+  margin: 20px;
+  background-color: #FFF;
 }
