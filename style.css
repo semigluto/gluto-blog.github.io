@@ -11,7 +11,7 @@ ul{
   margin:0;
   padding:0;
   overflow: hidden;
-  background-color: #C5C5C5;
+  background-color: #999;
 }
 
 li{
@@ -27,11 +27,11 @@ li a{
 }
 
 li a:hover:not(.active){
-  background-color: #C2C2C2;
+  background-color: #959595;
 }
 
 .active{
-  background-color: #87CEEB;
+  background-color: ##5bbfe7;
 }
 
 .postlist{
