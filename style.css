@@ -11,7 +11,7 @@ ul{
   margin:0;
   padding:0;
   overflow: hidden;
-  background-color: #999;
+  background-color: #888888;
 }
 
 li{
@@ -22,53 +22,56 @@ li a{
   display: block;
   color: #FFF;
   text-align: center;
-  padding: 14px 16px;
+  padding: 13.6px 16px;
   text-decoration: none;
 }
 
 li a:hover:not(.active){
-  background-color: #959595;
+  background-color: #808080;
 }
 
 .active{
-  background-color: #5bbfe7;
+  background-color: #48acd4;
 }
 
 .main{
-  margin-top: 80px;
+  margin-left: 20px;
+  margin-top: 68px;
 }
 
 .leftmain{
   float: left;
-  padding: 2.5%;
-  width: 25%;
+  margin-right: 10px;
+  width: 200px;
 }
 
 .left-aboutbar{
   border: 0px;
   border-radius: 10px;
+  height: 250px;
   background-color: #FFF;
 }
 
 .icon{
-  margin: 25px;
+  margin: 22.6px;
   border: 3px solid black;
   border-radius: 100px;
 }
 
 .rightmain{
   float: left;
-  padding: 2.5%;
-  width: 65%;
+  margin-left: 10px;
+  width: 75%;
 }
 
 .postlist{
   float: left;
+  width: 100%;
 }
 
 .post{
   float: left;
-  width: 500px;
+  width: 100%;
   background-color: #FFF;
   border: 0;
   border-radius: 10px;
