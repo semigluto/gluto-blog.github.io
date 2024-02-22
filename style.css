@@ -35,12 +35,19 @@ li a:hover:not(.active){
 }
 
 .leftmain{
-  margin: 30px;
   float: left;
+  margin: 30px;
   width: 30%;
 }
 
+.leftbar{
+  width: 300px;
+  height: 300px;
+  border-radius:10px; 
+}
+
 .rightmain{
+  float: left;
   margin: 30px;
   width: 70%;
 }
