@@ -34,6 +34,10 @@ li a:hover:not(.active){
   background-color: #5bbfe7;
 }
 
+.main{
+  margin-top: 80px;
+}
+
 .leftmain{
   float: left;
   margin: 30px;
@@ -43,7 +47,8 @@ li a:hover:not(.active){
 .leftbar{
   width: 300px;
   height: 300px;
-  border-radius:10px; 
+  border-radius: 10px;
+  background-color: FFF;
 }
 
 .rightmain{
@@ -53,7 +58,6 @@ li a:hover:not(.active){
 }
 
 .postlist{
-  margin-top: 80px;
   float: center;
 }
 
