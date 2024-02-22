@@ -34,6 +34,17 @@ li a:hover:not(.active){
   background-color: #5bbfe7;
 }
 
+.leftmain{
+  margin: 30px;
+  float: left;
+  width: 30%;
+}
+
+.rightmain{
+  margin: 30px;
+  width: 70%;
+}
+
 .postlist{
   margin-top: 80px;
   float: center;
