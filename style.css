@@ -40,7 +40,7 @@ li a:hover:not(.active){
 
 .leftmain{
   float: left;
-  padding: 30px;
+  padding: 5%;
   width: 30%;
 }
 
@@ -53,8 +53,8 @@ li a:hover:not(.active){
 
 .rightmain{
   float: left;
-  padding: 30px;
-  width: 70%;
+  padding: 5%;
+  width: 50%;
 }
 
 .postlist{
