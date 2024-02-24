@@ -46,19 +46,11 @@ li a:hover:not(.active){
   width: 250px;
 }
 
-.left-barinfo{
-  margin: 20;
-  background-color: #FFF;
+.leftbarlist{
+  margin-bottom: 20px; 
 }
 
-.left-introbar{
-  border: 0px;
-  border-radius: 10px;
-  height: 200px;
-  background-color: #FFF;
-}
-
-.left-aboutbar{
+.leftbar{
   border: 0px;
   border-radius: 10px;
   height: 400px;
