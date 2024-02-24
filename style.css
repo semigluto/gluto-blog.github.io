@@ -51,19 +51,21 @@ li a:hover:not(.active){
   width: 250px;
 }
 
-.leftbarlist{
-  margin-bottom: 20px; 
+.barlist{
+  float: left;
 }
 
-.leftbar{
+.bar{
+  margin-bottom: 20px; 
   border: 0px;
   border-radius: 10px;
   height: 400px;
   background-color: #FFF;
 }
 
-.leftbarinfo{
-  margin: 20px;
+.barinfo{
+  padding: 20px;
+  padding-top: 0px;
   background-color: #FFF;
 }
 
