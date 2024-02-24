@@ -43,18 +43,25 @@ li a:hover:not(.active){
 .leftmain{
   float: left;
   margin-right: 10px;
-  width: 200px;
+  width: 250px;
+}
+
+.left-introbar{
+  border: 0px;
+  border-radius: 10px;
+  height: 200px;
+  background-color: #FFF;
 }
 
 .left-aboutbar{
   border: 0px;
   border-radius: 10px;
-  height: 250px;
+  height: 400px;
   background-color: #FFF;
 }
 
 .icon{
-  margin: 22.6px;
+  margin: 47px;
   border: 3px solid black;
   border-radius: 100px;
 }
