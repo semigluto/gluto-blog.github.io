@@ -46,6 +46,11 @@ li a:hover:not(.active){
   width: 250px;
 }
 
+.left-barinfo{
+  margin: 20;
+  background-color: #FFF;
+}
+
 .left-introbar{
   border: 0px;
   border-radius: 10px;
@@ -61,7 +66,7 @@ li a:hover:not(.active){
 }
 
 .icon{
-  margin: 47px;
+  margin: 22px;
   border: 3px solid black;
   border-radius: 100px;
 }
