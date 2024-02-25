@@ -45,6 +45,12 @@ li a:hover:not(.active){
   margin-top: 68px;
 }
 
+.link{
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
 .leftmain{
   float: left;
   margin-right: 10px;
