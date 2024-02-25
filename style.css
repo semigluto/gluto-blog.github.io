@@ -60,11 +60,12 @@ li a:hover:not(.active){
   margin-bottom: 20px; 
   border: 0px;
   border-radius: 10px;
-  height: 400px;
+  width: 246;
   background-color: #FFF;
 }
 
 .barinfo{
+  width: 210px;
   margin: 20px;
   background-color: #FFF;
 }
