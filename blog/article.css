@@ -46,3 +46,8 @@ li a:hover:not(.active){
   border-radius: 10px;
   background-color: #FFFFFF;
 }
+
+.content{
+  margin: 20px auto;
+  background-color: #FFFFFF;
+}
