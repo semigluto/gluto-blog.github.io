@@ -48,6 +48,6 @@ li a:hover:not(.active){
 }
 
 .content{
-  margin: 20px;
+  padding: 20px;
   background-color: #FFFFFF;
 }
