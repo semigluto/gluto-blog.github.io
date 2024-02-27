@@ -51,3 +51,13 @@ li a:hover:not(.active){
   padding: 20px;
   background-color: #FFFFFF;
 }
+
+a{
+  color: blue;
+  text-decoration: none;
+}
+
+a:visited{
+  color: blue;
+  text-decoration: none;
+}
