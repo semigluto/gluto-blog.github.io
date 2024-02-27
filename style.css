@@ -12,7 +12,7 @@ ul{
   margin:0;
   padding:0;
   overflow: hidden;
-  background-color: #888888;
+  background-color: #ffcc66;
 }
 
 li{
@@ -29,10 +29,6 @@ li a{
 
 li a:hover:not(.active){
   background-color: #808080;
-}
-
-.active{
-  background-color: #48acd4;
 }
 
 .main{
@@ -102,12 +98,7 @@ li a:hover:not(.active){
   background-color: #FFF;
 }
 
-a{
-  color: blue;
-  text-decoration: none;
-}
-
-a:visited{
-  color: blue;
+link{
+  color: #10b5ff;
   text-decoration: none;
 }
