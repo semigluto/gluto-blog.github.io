@@ -107,3 +107,8 @@ li a:hover:not(.active){
   color: #000000;
   text-decoration: none;
 }
+
+.nlink:hover{
+  color: #000000;
+  text-decoration: underline;
+}
