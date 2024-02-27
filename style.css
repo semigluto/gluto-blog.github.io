@@ -99,6 +99,11 @@ li a:hover:not(.active){
 }
 
 .link{
-  color: #10b5ff;
+  color: #2196F3;
+  text-decoration: none;
+}
+
+.nlink{
+  color: #000000;
   text-decoration: none;
 }
