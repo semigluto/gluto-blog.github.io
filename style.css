@@ -1,8 +1,3 @@
-.center{
-  float: center;
-}
-
-
 body{
   margin: 0;
   background-color: #F9F5E9;
@@ -105,4 +100,14 @@ li a:hover:not(.active){
 .postinfo{
   margin: 20px;
   background-color: #FFF;
+}
+
+a{
+  color: blue;
+  text-decoration: none;
+}
+
+a:visited{
+  color: blue;
+  text-decoration: none;
 }
