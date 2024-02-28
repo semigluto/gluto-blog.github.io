@@ -59,3 +59,8 @@ a:hover{
   color: #2196F3;
   text-decoration: under-line;
 }
+
+blockquote {
+  border-left: 8px solid #fafafa;
+  padding: 1rem;
+}
