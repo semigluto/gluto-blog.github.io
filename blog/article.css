@@ -64,11 +64,6 @@ a:visited{
   text-decoration: none;
 }
 
-a:hover{
-  color: #2196F3;
-  text-decoration: under-line;
-}
-
 pre,
 code {
   background-color: #fafafa;
