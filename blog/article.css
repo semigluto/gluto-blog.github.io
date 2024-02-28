@@ -1,3 +1,12 @@
+@import "furtive-print";
+@import "furtive-code";
+@import "furtive-links";
+@import "furtive-typescale";
+@import "furtive-responsive-utils";
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700);
+@import url(http://fonts.googleapis.com/css?family=Arimo:700,700italic);
+
 body{
   margin: 0;
   background-color: #F9F5E9;
