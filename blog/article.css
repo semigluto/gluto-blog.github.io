@@ -27,10 +27,6 @@ li a{
   text-decoration: none;
 }
 
-li a:hover:not(.active){
-  background-color: #808080;
-}
-
 .main{
   margin: 20px;
   margin-top: 70px;
