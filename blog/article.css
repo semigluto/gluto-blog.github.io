@@ -59,6 +59,11 @@ a{
 }
 
 a:visited{
-  color: blue;
+  color: #2196F3;
   text-decoration: none;
+}
+
+a:hover{
+  color: #2196F3;
+  text-decoration: under-line;
 }
