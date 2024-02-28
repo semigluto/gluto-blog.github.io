@@ -60,7 +60,7 @@ a:hover{
   text-decoration: under-line;
 }
 
-blockquote {
+code{
   border-left: 8px solid #fafafa;
   padding: 1rem;
 }
