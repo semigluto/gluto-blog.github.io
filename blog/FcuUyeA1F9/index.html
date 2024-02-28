@@ -3,17 +3,6 @@
   <meta charset="UTF-8"/>
   <title>xxxx的博客，网站暂未开放</title>
   <link rel="stylesheet" href="https://joeys-blog.github.io/blog/article.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-        function loadMarkdownFile() {
-            fetch('markdown.md')
-                .then(response => response.text())
-                .then(markdown => {
-                    const html = marked(markdown);
-                    document.getElementById('markdown-content').innerHTML = html;
-                });
-        }
-    </script>
 </head>
 
 <body onload="loadMarkdownFile()>
@@ -28,7 +17,7 @@
   <div class="main">
     <article class="article">
       <header class="content">
-        <div id=markdown-content></div>
+        <link rel="import" href="markdown.html" id="article" />
       </header>
     </article>
   </div>
