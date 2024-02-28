@@ -53,33 +53,36 @@
 																												<h2 id="228">[2/28]</h2>
 																												<p>
 																													<strong>Docker生成一个虚拟化的空间（容器）</strong>，提供给你一个运行程序的的地方
-Docker十分方便，比传统的虚拟机要好很多。 
-Docker优点：
-																													<br>执行速度快
-																														<br>占用内存少
-																															<br>更容易迁移和维护
-																																<br>理解Docker需要理解容器，镜像，和仓库这三个概念
-																																	<br>**Docker镜像(Image)**是一个特殊的文件系统，提供了容器需要运行的各种程序，库，资源，或配置等文件和其参数
-																																		<br>**Docker容器(Container)**和镜像的关系，就像c++面向对象里的类和实例一样（很好的例子）。
+Docker十分方便，比传统的虚拟机要好很多。
+																													<br>Docker优点：  
+																													</p>
+																													<ul>
+																														<li>执行速度快  </li>
+																														<li>占用内存少  </li>
+																														<li>更容易迁移和维护</li>
+																													</ul>
+																													<p>理解Docker需要理解容器，镜像，和仓库这三个概念
+																														<br>**Docker镜像(Image)**是一个特殊的文件系统，提供了容器需要运行的各种程序，库，资源，或配置等文件和其参数
+																															<br>**Docker容器(Container)**和镜像的关系，就像c++面向对象里的类和实例一样（很好的例子）。
 容器是镜像运行的实体，容器可以被创建、启动、停止等。
-																																			<br>**Docker仓库(Repository)**是一个存储镜像的地方，仓库中包含对应着镜像的标签。  
-																																			</p>
-																																			<p>运行容器需要在本地存在对应的镜像，如果不存在镜像，docker将从镜像仓库下载。 
+																																<br>**Docker仓库(Repository)**是一个存储镜像的地方，仓库中包含对应着镜像的标签。  
+																																</p>
+																																<p>运行容器需要在本地存在对应的镜像，如果不存在镜像，docker将从镜像仓库下载。 
 从docker仓库获取镜像并下载到本地：
 
-																																				<code>docker pull [选项] [Docker Registry 地址[:端口号]/]仓库名[:标签]</code>
+																																	<code>docker pull [选项] [Docker Registry 地址[:端口号]/]仓库名[:标签]</code>
 比如：
 
-																																				<code>docker pull ubuntu:20.04</code>
-																																				<br>我这边成功了，压缩的镜像只有27MB，然后运行镜像：
-																																					<br>
-																																						<code>docker run -it --rm ubuntu:20.04 bash</code>
-																																						<br>然后在运行程序里输入：
+																																	<code>docker pull ubuntu:20.04</code>
+																																	<br>我这边成功了，压缩的镜像只有27MB，然后运行镜像：
+																																		<br>
+																																			<code>docker run -it --rm ubuntu:20.04 bash</code>
+																																			<br>然后在运行程序里输入：
 
-																																							<code>cat /etc/os-release</code>
-																																							<br>这将会输出镜像的相关信息
-																																								<br>最后输入
-																																									<code>exit</code>就能退出程序了
-																																									<br>上述教程记笔记的网址：
-																																										<a href="https://docker-practice.github.io/zh-cn/">https://docker-practice.github.io/zh-cn/</a>
-																																									</p>
+																																				<code>cat /etc/os-release</code>
+																																				<br>这将会输出镜像的相关信息
+																																					<br>最后输入
+																																						<code>exit</code>就能退出程序了
+																																						<br>上述教程记笔记的网址：
+																																							<a href="https://docker-practice.github.io/zh-cn/">https://docker-practice.github.io/zh-cn/</a>
+																																						</p>
