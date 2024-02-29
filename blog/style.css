@@ -28,57 +28,15 @@ li a{
 }
 
 .main{
+  width: 100%;
   display: flex;
   margin: 20px;
   margin-top: 70px;
 }
 
-.link{
-  white-space: normal;
-  word-wrap: break-word;
-  word-break: break-word;
-}
-
-.leftmain{
-  float: left;
-  margin-right: 15px;
-  width: 250px;
-}
-
-.barlist{
-  float: left;
-}
-
-.bar{
-  float: left;
-  margin-bottom: 20px; 
-  border: 0px;
-  border-radius: 10px;
-  width: 246;
-  background-color: #FFF;
-}
-
-.barinfo{
-  width: 210px;
-  margin: 20px;
-  background-color: #FFF;
-}
-
-.icon{
-  margin: 0px;
-  border: 3px solid black;
-  border-radius: 100px;
-}
-
-.rightmain{
-  float: left;
-  margin-left: 15px;
-  flex-grow: 1;
-}
-
 .postlist{
-  float: left;
-  width: 100%;
+  margin: 0 auto;
+  width: 1000px;
 }
 
 .post{
