@@ -18,11 +18,39 @@
   <div class="main">
     <article class="article">
       <header class="content">
-        <h1>网站简介</h1>
-        <p>网站链接：https://joeys-blog.github.io</p>
-        <p>主网页源代码(html)：view-source:https://joeys-blog.github.io/index.html</p>
-        <p>主网页源代码(css)：view-source:https://joeys-blog.github.io/style.css</p>
-        </header>
+         <h1 id="-socket使用笔记"><center> Socket使用笔记</h1>
+<h1 id="2月28日">2月28日</h1>
+<p>今天开始学Socket，Docker刚配置完，Docker以后可能也对Socket有帮助<br>之前有认识过，先讲下socket是什么
+Socket是C++主要的网络编程技术。可以使两个电脑通信
+我以前有在windows上尝试过，没有成功，这次试以下Linux下的Socket<br>想找安装教程的时候，一直没有找到，原来linux gnu自带socket的文件（当时要被自己笑死），它位于该目录下：<code>/usr/include/x86_64-linux-gnu/sys</code>  </p>
+<h1 id="2月29日">2月29日</h1>
+<h2 id="要理解socket-要先理解osi模型和tcp模型">要理解Socket, 要先理解OSI模型和TCP模型</h2>
+<p><strong>(OSI, Open System Interconnection Reference Model)</strong>
+<img src="https://img-blog.csdnimg.cn/20201028134158932.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d3eTAzMjQ=,size_16,color_FFFFFF,t_70#pic_center" alt="OSIModel">
+应用层：为应用程序或用户请求提供各种请求服务<br>表示层：数据编码，格式转换，加密等<br>会话层：创建和维护对话，接受传输层的数据并管理实体之间的通信<br>传输层： 数据通信，建立主机端到端的链接<br>网络层：IP选址和路由器等<br>数据链路层：提供介质访问和链路管理，将数据封装成帧<br>物理层：直接的物理连接<br><strong>OSI内部的TCP/IP五层模型</strong>
+<img src="https://pic2.zhimg.com/v2-c29b86bf577e18f4c94bef7b84d590e9_r.jpg" alt="TCPModel"><br>参考的教程：   <a href="https://zhuanlan.zhihu.com/p/143654140">https://zhuanlan.zhihu.com/p/143654140</a>  <a href="https://blog.csdn.net/CharlesJhonson/article/details/105453032">https://blog.csdn.net/CharlesJhonson/article/details/105453032</a>  </p>
+<h2 id="开始写代码">开始写代码</h2>
+<p>引入socket需要的头文件： </p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;string.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+</code></pre>
+<h3 id="socket函数">socket()函数</h3>
+<p>作用：创建一个socket
+<code>int socket(int domain, int type, int protocol); //返回sockfd</code><br><strong>domain:协议族{AF_INET,AF_INET6,AF_UNIX,ETC}</strong>
+协议族决定了socket的地址类型<br>比如AF_INET决定了用ipv4地址，AF_UNIX决定了要用一个绝对路径<br>**type:指定socket类型{SOCK_STREAM,SOCK_DGRAM,SOCK_RAW,SOCK_PACKET,SOCK_SEQPACKET,ETC}<br>**protocol:指定协议{IPPROTO_TCP、IPPTOTO_UDP、IPPROTO_SCTP、IPPROTO_TIPC}<br>集合的元素分别对应着{TCP,UDP,STCP,TIPC}  </p>
+<h3 id="bind函数">bind()函数</h3>
+<p>作用：给socket绑定一个地址<br><code>int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);</code><br><strong>sockfd:socket表数字，已经被socket函数创建了，用于标识socket</strong><br>*<em>addr:一个const struct sockaddr <em>指针</em></em><br>指向要绑定的协议地址，这个地址结构根据地址创建socket时的地址协议族的不同而不同<br>ipv4: sockaddr_in,in_addr<br>ipv6: sockaddr_in6,in6_addr<br>unix: sockaddr_un<br><strong>addrlen:地址的长度</strong></p>
+<h3 id="listen和connect函数">listen()和connect()函数</h3>
+<p>调用socket()和bind()函数后就要调用listen()函数来监听socket，如果这时客户端通过connect()发送请求，服务端就会收到这个请求  </p>
+<pre><code>int listen(int sockfd, int backlog);
+int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+</code></pre>
+<p><strong>[listen]sockfd &amp; [connect]sockfd: socket描述字</strong><br><strong>[listen]backlog: socket最大连接次数</strong><br><strong>[connect]addr: socket地址（指针形式）</strong><br><strong>[connect]addrlen: socket地址长度</strong><br>笔记取自：<a href="https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html">https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html</a></p>
+   
+      </header>
     </article>
   </div>
 </body>
