@@ -28,42 +28,25 @@ li a{
 }
 
 .main{
-  width: 100%;
-  display: flex;
   margin: 20px;
   margin-top: 70px;
 }
 
-.postlist{
+.content{
+  padding: 20px;
   margin: 0 auto;
   width: 800px;
-}
-
-.post{
-  float: left;
-  width: 100%;
-  background-color: #FFF;
   border: 0;
   border-radius: 10px;
-  margin-bottom: 20px;
+  background-color: #FFFFFF;
 }
 
-.postinfo{
-  margin: 20px;
-  background-color: #FFF;
-}
-
-.link{
+a{
   color: #2196F3;
   text-decoration: none;
 }
 
-.nlink{
-  color: #000000;
+a:visited{
+  color: #2196F3;
   text-decoration: none;
-}
-
-.nlink:hover{
-  color: #000000;
-  text-decoration: underline;
 }
