@@ -32,35 +32,23 @@ li a{
   margin-top: 70px;
 }
 
-.content{
-  margin: 0 auto;
-  width: 800px;
-  border: 0;
-  border-radius: 10px;
-  background-color: #FFFFFF;
-}
-
-.table{
-  padding: 20px;
+table{
+  padding: 15px;
   background-color: #FFFFFF;
 }
 
 thead{
+  width: 100%;
   display: block;
+  height: 40px;
 }
 
-tbody{
-  display: block
+left{
+  display: block;
+  width: 66.67;
 }
 
-tleft{
-  float: left;
-  display: 0;
-  margin: 0 auto;
-}
-
-tright{
-  float: right;
-  display: 0;
-  margin: 0 auto;
+right{
+  display: block;
+  width: 33.33;
 }
