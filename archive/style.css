@@ -48,12 +48,16 @@ thead{
 }
 
 left{
+  text-align: center;
+  float: left;
   display: block;
   width: 66.66;
   height: 30px;
 }
 
 right{
+  text-align: center;
+  float: right;
   display: block;
   width: 33.33;
   height: 30px;
