@@ -28,6 +28,7 @@ li a{
 }
 
 .main{
+  width: 1000px;
   display: flex;
   margin: 20px;
   margin-top: 70px;
