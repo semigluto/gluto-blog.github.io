@@ -46,7 +46,7 @@ li a{
   background-color: #FFFFFF;
 }
 
-.block p{
+.block p,h3{
   margin: 5px;
 }
 
