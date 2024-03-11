@@ -33,7 +33,7 @@ li a{
   margin-top : 90px;
 }
 
-table{
+.table{
   width: 100%;
   height: 100%;
   border: 0;
@@ -42,14 +42,14 @@ table{
   background-color: #FFFFFF;
 }
 
-block{
+.block{
   width: 100%;
   display: block;
   height: 40px;
   background-color: #FFFFFF;
 }
 
-left{
+.left{
   text-align: center;
   float: left;
   display: block;
@@ -57,7 +57,7 @@ left{
   height: 30px;
 }
 
-right{
+.right{
   text-align: center;
   float: right;
   display: block;
