@@ -35,27 +35,30 @@ li a{
 .table{
   margin: 0 auto;
   width: 500px;
-  height: 400px;
+  height: 500px;
   border-radius: 10px; 
   background-color: #FFFFFF;
 }
 
 header{
-  width: 100%;
+  padding-top: 5px;
   height: 50px;
   background-color: #FFFFFF;
-  border-bottom: 5px;
-  margin-bottom: 5px;
-  padding-bottom: 5px;
+  border-bottom: 2px dashed;
+}
+
+header h3{
+  line-height: 8px;
 }
 
 block{
-  width: 100%;
+  padding-top: 5px;
+  width: 1000px;
   height: 50px;
-  background-color: #FFFFFF;
+  background-color: transparent;
 }
 
-.block p,a{
+block p,a{
   line-height: 20px;
   margin: 20px;
   margin-top: 15px;
@@ -63,20 +66,20 @@ block{
   text-decoration: 0;
 }
 
-.block:hover{
+block:hover{
    background-color: #fbf0cf;
 }
 
 left{
+  margin-left: 20px;
   text-align: left;
   float: left;
   display: block;
-  width: 66.66%;
 }
 
 right{
+  margin-right: 20px;
   text-align: right;
   float: right;
   display: block;
-  width: 33.33%;
 }
