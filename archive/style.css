@@ -53,7 +53,8 @@ li a{
   margin-bottom: 15px;
 }
 
-.block p{
+.block a{
+  display: block;
   line-height: 20px;
   margin: 20px;
   margin-top: 12px;
