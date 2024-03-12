@@ -55,26 +55,26 @@ li a{
   background-color: #FFFFFF;
 }
 
-.block:hover{
-   background-color: #fbf0cf;
-}
-
-.left{
+.block p,a{
   line-height: 20px;
   margin: 20px;
   margin-top: 15px;
   margin-bottom: 15px;
+  text-decoration: 0;
+}
+
+.block:hover{
+   background-color: #fbf0cf;
+}
+
+left{
   text-align: left;
   float: left;
   display: block;
   width: 66.66%;
 }
 
-.right{
-  line-height: 20px;
-  margin: 20px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+right{
   text-align: right;
   float: right;
   display: block;
