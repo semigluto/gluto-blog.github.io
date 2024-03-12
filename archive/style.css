@@ -55,26 +55,15 @@ li a{
   background-color: #FFFFFF;
 }
 
-.block h3{
-  line-height: 20px;
-  margin: 20px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.block a{
-  display: block;
-  line-height: 20px;
-  margin: 20px;
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
-
 .block:hover{
    background-color: #fbf0cf;
 }
 
 .left{
+  line-height: 20px;
+  margin: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   text-align: left;
   float: left;
   display: block;
@@ -82,6 +71,10 @@ li a{
 }
 
 .right{
+  line-height: 20px;
+  margin: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   text-align: right;
   float: right;
   display: block;
