@@ -46,11 +46,18 @@ li a{
   background-color: #FFFFFF;
 }
 
-.block p,h3{
+.block h3{
   line-height: 20px;
   margin: 20px;
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.block p{
+  line-height: 20px;
+  margin: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .block:hover{
