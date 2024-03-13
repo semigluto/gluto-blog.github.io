@@ -24,6 +24,7 @@ li a{
   color: #FFF;
   text-align: center;
   padding: 13.6px 16px;
+  margin: 0;
   text-decoration: none;
 }
 
@@ -51,18 +52,12 @@ header h3{
   line-height: 8px;
 }
 
-block{
-  padding-top: 5px;
-  height: 30px;
-  background-color: #FFFFFF;
-}
-
-block p,a{
-  line-height: 20px;
-  margin: 20px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  text-decoration: 0;
+block a{
+  display: block;
+  color: #FFF;
+  text-align: center;
+  padding: 13.6px 16px;
+  text-decoration: none;
 }
 
 block:hover{
