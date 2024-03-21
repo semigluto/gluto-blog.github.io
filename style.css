@@ -31,7 +31,7 @@ li a{
   width: 1000px;
   display: flex;
   margin: 20px auto;
-  margin-top: 90px;
+  margin-top: 80px;
 }
 
 .link{
@@ -43,7 +43,7 @@ li a{
 .leftmain{
   float: left;
   margin-right: 15px;
-  width: 250px;
+  width: 300px;
 }
 
 .barlist{
@@ -60,12 +60,12 @@ li a{
 }
 
 .barinfo{
-  width: 210px;
-  margin: 20px;
+  width: 240px;
+  margin: 25px;
 }
 
 .barinfo h2{
-  color: #000000;
+  margin-bottom:30px;
   text-decoration: none;
 }
 
@@ -101,12 +101,12 @@ li a{
 }
 
 .postinfo{
-  margin: 20px;
+  margin: 25px;
   background-color: #FFF;
 }
 
 .postinfo h2{
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .postinfo a{
