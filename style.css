@@ -62,7 +62,6 @@ li a{
 .barinfo{
   width: 210px;
   margin: 20px;
-  background-color: #FFF;
 }
 
 .barinfo h2{
@@ -104,6 +103,19 @@ li a{
 .postinfo{
   margin: 20px;
   background-color: #FFF;
+}
+
+.postinfo h2{
+  margin-bottom: 20px;
+}
+
+.postinfo a{
+  text-decoration: none;
+  color: #000000;
+}
+
+.postinfo a:hover{
+  text-decoration: underline;
 }
 
 .link{
