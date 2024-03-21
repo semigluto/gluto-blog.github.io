@@ -43,7 +43,7 @@ li a{
 .leftmain{
   float: left;
   margin-right: 15px;
-  width: 300px;
+  width: 250px;
 }
 
 .barlist{
@@ -60,7 +60,7 @@ li a{
 }
 
 .barinfo{
-  width: 240px;
+  width: 210px;
   margin: 25px;
 }
 
