@@ -65,6 +65,16 @@ li a{
   background-color: #FFF;
 }
 
+.barinfo h2{
+  color: #000000;
+  text-decoration: none;
+}
+
+.barinfo h2:hover{
+  color: #000000;
+  text-decoration: underline;
+}
+
 .icon{
   margin: 0px;
   border: 3px solid black;
@@ -99,14 +109,4 @@ li a{
 .link{
   color: #2196F3;
   text-decoration: none;
-}
-
-.nlink{
-  color: #000000;
-  text-decoration: none;
-}
-
-.nlink:hover{
-  color: #000000;
-  text-decoration: underline;
 }
