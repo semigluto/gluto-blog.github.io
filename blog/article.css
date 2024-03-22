@@ -28,8 +28,9 @@ li a{
 }
 
 .main{
-  margin: 20px;
-  margin-top: 70px;
+  display: flex;
+  margin: 20px auto;
+  margin-top: 80px;
 }
 
 .article{
