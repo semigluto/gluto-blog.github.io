@@ -37,13 +37,12 @@ nav li a{
   margin: 0 auto;
   width: 800px;
   border: 0;
-  border-radius: 10px;
+  border-radius: 20px;
   background-color: #FFFFFF;
 }
 
 .content{
   padding: 20px;
-  background-color: #FFFFFF;
 }
 
 a{
