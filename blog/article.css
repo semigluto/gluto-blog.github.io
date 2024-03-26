@@ -45,12 +45,12 @@ nav li a{
   padding: 20px;
 }
 
-a{
+nav a{
   color: #2196F3;
   text-decoration: none;
 }
 
-a:visited{
+nav a:visited{
   color: #2196F3;
   text-decoration: none;
 }
