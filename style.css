@@ -31,6 +31,7 @@ li a{
   width: 1000px;
   display: flex;
   margin: 20px auto;
+  margin-top: 0px; 
 }
 
 .link{
@@ -43,7 +44,7 @@ li a{
   float: left;
   margin-right: 15px;
   width: 250px;
-  margin-top: 80px;
+  margin-top: 70px;
 }
 
 .barlist{
@@ -84,7 +85,7 @@ li a{
   float: left;
   margin-left: 15px;
   flex-grow: 1;
-  margin-top: 80px;
+  margin-top: 70px;
 }
 
 .postlist{
