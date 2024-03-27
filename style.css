@@ -31,7 +31,6 @@ li a{
   width: 1000px;
   display: flex;
   margin: 20px auto;
-  margin-top: 0px; 
 }
 
 .link{
@@ -44,7 +43,7 @@ li a{
   float: left;
   margin-right: 15px;
   width: 250px;
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
 .barlist{
@@ -57,7 +56,7 @@ li a{
   border: 0px;
   border-radius: 10px;
   width: 246;
-  background-color: #FFF;
+  background-color: #FFFd;
 }
 
 .barinfo{
@@ -79,13 +78,15 @@ li a{
   margin: 0px;
   border: 3px solid black;
   border-radius: 100px;
+  opacity: 0.9;
+  filter: none;
 }
 
 .rightmain{
   float: left;
   margin-left: 15px;
   flex-grow: 1;
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
 .postlist{
@@ -96,7 +97,7 @@ li a{
 .post{
   float: left;
   width: 100%;
-  background-color: #FFF;
+  background-color: #FFFd;
   border: 0;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -104,7 +105,6 @@ li a{
 
 .postinfo{
   margin: 25px;
-  background-color: #FFF;
 }
 
 .postinfo h2{
