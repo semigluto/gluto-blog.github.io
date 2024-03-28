@@ -3,7 +3,7 @@ body{
   background-color: #F9F5E9;
 }
 
-ul{
+nav ul{
   position: fixed;
   top: 0;
   width: 100%;
@@ -15,11 +15,11 @@ ul{
   background-color: #ffcc66;
 }
 
-li{
+nav li{
   float: left;
 }
 
-li a{
+nav li a{
   display: block;
   color: #FFF;
   text-align: center;
@@ -36,7 +36,7 @@ li a{
 .article{
   margin: 0 auto;
   margin-top: 80px;
-  width: 100px;
+  width: 1000px;
   border: 0;
   border-radius: 20px;
   background-color: #FFFd;
