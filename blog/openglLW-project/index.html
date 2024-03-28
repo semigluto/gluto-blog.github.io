@@ -1,1 +1,321 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>xxxx的博客，网站暂未开放</title>
+  <link rel="stylesheet" href="https://colder-joey.github.io/blog/article.css">
+</head>
 
+<body>
+  <!--navigation bar-->
+  <nav>
+    <ul>
+      <li><a class="active" href="https://joeys-blog.github.io/">主页</a></li>
+      <li><a href="https://joeys-blog.github.io/archive/">资源</a></li>
+      <li style="float:right"><a href="https://joeys-blog.github.io/blog/intro/">关于</a></li>
+    </ul>
+  </nav>
+
+  <div class="main">
+    <article class="article">
+      <header class="content markdown-body">
+       <h1 id="-project-opengl-lab-">[project] OpenGL Lab漫游</h1>
+<p>本项目使用OpenGl，非新版GLFW制作，而是用旧版的GLUT<br>耗时一个月，终于打造完成<br>Linux的OpenGL安装使用教程看<a href="https://blog.csdn.net/qq_16691045/article/details/87473870">这篇博客</a><br>编译例子：<code>g++ main.cpp -o main -lGL -lGLU -lglut</code>
+代码真心手工制作，290+多行，制作不易，感谢来看我的网站</p>
+<p>废话不多说，直接上代码</p>
+<pre><code>#define GLUT_DISABLE_ATEXIT_HACK
+#define _USE_MATH_DEFINES
+#include &lt;math.h&gt;
+#include &lt;GL/gl.h&gt;
+#include &lt;GL/glu.h&gt;
+#include &lt;GL/glut.h&gt;
+#include &lt;stdio.h&gt;
+
+#define STB_IMAGE_IMPLEMENTATION
+#include <span class="hljs-string">"stb_image.h"</span>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdbool.h&gt;
+
+
+#define SCREEN_SIZE <span class="hljs-number">40</span>
+#define convert_rgb(x) x/<span class="hljs-number">256.0</span>
+#define <span class="hljs-literal">PI</span> <span class="hljs-number">3.1415926</span>
+#define TOR <span class="hljs-literal">PI</span>/<span class="hljs-number">180</span>
+
+
+void display();
+void reshape(int,int);
+void keyboard(unsigned char,int,int);
+void move(int,int);
+void <span class="hljs-section">timer</span>(int);
+void init();
+
+unsigned int tim=<span class="hljs-number">0</span>;
+
+<span class="hljs-type">float</span> lr_angle=<span class="hljs-number">0</span>,ud_angle=<span class="hljs-number">0</span>;
+int screen_x,screen_y;
+<span class="hljs-type">float</span> center_x=<span class="hljs-number">0</span>,center_y=<span class="hljs-number">2</span>,center_z=<span class="hljs-number">5</span>;
+double look_x_temp,look_z_temp;
+long double reduce=<span class="hljs-number">1</span>,look_x=<span class="hljs-number">0</span>,look_y=<span class="hljs-number">0</span>,look_z=<span class="hljs-number">-1</span>;
+
+double z0_pos_x;
+double z0_pos_y;
+
+unsigned int textureID;
+int width,height,nrChannels;
+unsigned char *data;
+
+int main(int argc,char **argv)
+{
+    glutInit(&amp;argc,argv);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+    glutInitWindowPosition(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);
+    glutInitWindowSize(<span class="hljs-number">1980</span>,<span class="hljs-number">1080</span>);
+    glutCreateWindow(<span class="hljs-string">"title"</span>);
+    glutFullScreen(); 
+
+    glutDisplayFunc(display);
+    glutIdleFunc(display);
+    glutReshapeFunc(reshape);
+    glutKeyboardFunc(keyboard);
+    glutTimerFunc(<span class="hljs-number">0</span>,<span class="hljs-section">timer</span>,<span class="hljs-number">0</span>);
+    glutPassiveMotionFunc(move);
+    init();
+
+    glutMainLoop();<span class="hljs-comment">//in loop</span>
+    return <span class="hljs-number">0</span>;
+}
+
+void display(){
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);<span class="hljs-comment">//clear</span>
+    glLoadIdentity();
+
+    gluLookAt(center_x,center_y,center_z,center_x+look_x,center_y+look_y,center_z+look_z,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);
+
+    glBegin(GL_QUADS);
+    glColor3f(<span class="hljs-number">0.5</span>,<span class="hljs-number">0.5</span>,<span class="hljs-number">0.5</span>);
+    glVertex3f(<span class="hljs-number">20.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-20.0</span>);
+    glVertex3f(<span class="hljs-number">20.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">20.0</span>);
+    glVertex3f(<span class="hljs-number">-20.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">20.0</span>);
+    glVertex3f(<span class="hljs-number">-20</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-20.0</span>);
+    glEnd();
+
+    glTranslatef(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>);
+
+    glBegin(GL_QUADS);
+    if (z0_pos_x&gt;<span class="hljs-number">-1.0</span>&amp;&amp;z0_pos_x&lt;<span class="hljs-number">1.0</span>&amp;&amp;z0_pos_y&gt;<span class="hljs-number">-1.0</span>+<span class="hljs-number">2.0</span>&amp;&amp;z0_pos_y&lt;<span class="hljs-number">1.0</span>+<span class="hljs-number">2.0</span>) glColor3f(<span class="hljs-number">0.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">0.0</span>);
+    else glColor3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">0.0</span>,<span class="hljs-number">0.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">0.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">0.0</span>);
+    glVertex3d(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">0.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">0.0</span>);
+    glEnd();
+
+    glTranslatef(<span class="hljs-number">5</span>,<span class="hljs-number">-2</span>,<span class="hljs-number">0</span>);
+
+    glBegin(GL_QUADS);
+        glColor3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">0.5</span>,<span class="hljs-number">0.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+        glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+        glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+    glEnd();
+
+    glLineWidth(<span class="hljs-number">3</span>);
+    glBegin(GL_LINES);
+    glColor3f(<span class="hljs-number">0.0</span>,<span class="hljs-number">0.0</span>,<span class="hljs-number">0.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">1.0</span>);
+    glVertex3f(<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>,<span class="hljs-number">-1.0</span>);
+    glEnd();
+
+    glTranslatef(<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);
+    glEnable(GL_TEXTURE_2D);
+    glBegin(GL_QUADS);
+    glTexCoord2f(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>); glVertex3f(<span class="hljs-number">-1.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>);
+        glTexCoord2f(<span class="hljs-number">1.0</span>, <span class="hljs-number">0.0</span>); glVertex3f(<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>);
+        glTexCoord2f(<span class="hljs-number">1.0</span>, <span class="hljs-number">1.0</span>); glVertex3f(<span class="hljs-number">1.0</span>, <span class="hljs-number">-1.0</span>, <span class="hljs-number">1.0</span>);
+        glTexCoord2f(<span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>); glVertex3f(<span class="hljs-number">-1.0</span>, <span class="hljs-number">-1.0</span>, <span class="hljs-number">1.0</span>);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+
+    glColor3f(<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>,<span class="hljs-number">1.0</span>);
+    glRasterPos3f(<span class="hljs-number">-3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>);
+
+    void *font=GLUT_BITMAP_TIMES_ROMAN_24;
+    const char *str=<span class="hljs-string">"Experimental_Lab"</span>;
+    while (*str){
+        glutBitmapCharacter(font,*str);
+        str++;
+    }
+
+
+    <span class="hljs-comment">// 禁用深度测试，以确保准星位于最前面</span>
+        glDisable(GL_DEPTH_TEST);
+        glColor3f(<span class="hljs-number">1.0</span>f, <span class="hljs-number">1.0</span>f, <span class="hljs-number">1.0</span>f);
+        <span class="hljs-comment">// 保存当前的变换矩阵</span>
+        glPushMatrix();
+        <span class="hljs-comment">// 将投影模式设置为正交投影</span>
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+        gluOrtho2D(<span class="hljs-number">-990</span>,<span class="hljs-number">990</span>,<span class="hljs-number">-540</span>,<span class="hljs-number">540</span>);
+
+        <span class="hljs-comment">// 切换回模型视图矩阵</span>
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        <span class="hljs-comment">// 绘制准星</span>
+        glBegin(GL_QUADS);
+        glVertex2f(<span class="hljs-number">-3</span>,<span class="hljs-number">-3</span>);
+        glVertex2f(<span class="hljs-number">3</span>,<span class="hljs-number">-3</span>);
+        glVertex2f(<span class="hljs-number">3</span>,<span class="hljs-number">3</span>);
+        glVertex2f(<span class="hljs-number">-3</span>,<span class="hljs-number">3</span>);
+       glEnd();
+
+       <span class="hljs-comment">// 恢复之前的投影矩阵</span>
+       glMatrixMode(GL_PROJECTION);
+       glPopMatrix();
+
+       <span class="hljs-comment">// 恢复之前的模型视图矩阵</span>
+       glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+
+        <span class="hljs-comment">// 重新启用深度测试</span>
+        glEnable(GL_DEPTH_TEST);
+
+    glutSwapBuffers();
+}
+
+void reshape(int w,int h){
+    glViewport(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,w,h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(<span class="hljs-number">75</span>,<span class="hljs-number">16.0</span>/<span class="hljs-number">9.0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">30</span>);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char <span class="hljs-type">key</span>, int x, int y){
+    if (<span class="hljs-type">key</span>=='q') exit(<span class="hljs-number">0</span>);
+
+    <span class="hljs-type">float</span> fab_z=cos(TOR*lr_angle)*<span class="hljs-number">0.1</span>;
+    <span class="hljs-type">float</span> fab_x=sin(TOR*lr_angle)*<span class="hljs-number">0.1</span>;
+
+    if (<span class="hljs-type">key</span>=='w'){center_x+=fab_x;center_z-=fab_z;}
+    if (<span class="hljs-type">key</span>=='s'){center_x-=fab_x;center_z+=fab_z;}
+    if (<span class="hljs-type">key</span>=='a'){center_x-=fab_z;center_z-=fab_x;}
+    if (<span class="hljs-type">key</span>=='d'){center_x+=fab_z;center_z+=fab_x;}    
+}
+
+void move(int x,int y){
+    screen_x=x-(<span class="hljs-number">1980</span>/<span class="hljs-number">2</span>);
+    screen_y=(<span class="hljs-number">1080</span>/<span class="hljs-number">2</span>)-y;
+}
+
+void <span class="hljs-section">timer</span>(int time){
+    glutPostRedisplay();
+    glutTimerFunc(<span class="hljs-number">1000.0</span>/<span class="hljs-number">60.0</span>,<span class="hljs-section">timer</span>,<span class="hljs-number">0</span>);
+    tim++;
+
+    <span class="hljs-comment">//motion</span>
+    lr_angle=screen_x*(<span class="hljs-number">360.0</span>/<span class="hljs-number">1980.0</span>);
+    ud_angle=screen_y*(<span class="hljs-number">180.0</span>/<span class="hljs-number">1080.0</span>);
+
+    look_x_temp=sin(TOR*lr_angle);
+    look_z_temp=-cos(TOR*lr_angle);
+
+    look_y=sin(TOR*ud_angle);
+    reduce=cos(TOR*ud_angle);
+
+    look_x=look_x_temp*reduce;
+    look_z=look_z_temp*reduce;
+
+    <span class="hljs-comment">//projection on the z=0</span>
+    z0_pos_x=(tan(TOR*lr_angle)*center_z)+center_x;
+    z0_pos_y=(tan(TOR*ud_angle)*((z0_pos_x-center_x)/sin(TOR*lr_angle)))+center_y;
+
+    <span class="hljs-comment">//log output</span>
+    if (tim%<span class="hljs-number">60</span>==<span class="hljs-number">0</span>){
+        printf(<span class="hljs-string">"time:%d"</span>,tim); 
+
+        printf(<span class="hljs-string">"screen_x:%d screen_y:%d<span class="hljs-subst">\n</span>"</span>,screen_x,screen_y);
+        printf(<span class="hljs-string">"lr_angle:%f ud_angle:%f<span class="hljs-subst">\n</span>"</span>,lr_angle,ud_angle);
+        printf(<span class="hljs-string">"look_x_temp:%f look_z_temp:%f<span class="hljs-subst">\n</span>"</span>,look_x_temp,look_z_temp);
+        printf(<span class="hljs-string">"look_y:%Lf reduce:%Lf<span class="hljs-subst">\n</span>"</span>,look_y,reduce);
+        printf(<span class="hljs-string">"look_x:%Lf look_z:%Lf<span class="hljs-subst">\n</span>"</span>,look_x,look_z);
+
+        printf(<span class="hljs-string">"z0_pos_x:%f z0_pos_y:%f<span class="hljs-subst">\n</span>"</span>,z0_pos_x,z0_pos_y);
+
+        printf(<span class="hljs-string">"<span class="hljs-subst">\n</span>"</span>);
+    }
+
+}
+
+void init(){
+    glClearColor(convert_rgb(<span class="hljs-number">113</span>), convert_rgb(<span class="hljs-number">188</span>), convert_rgb(<span class="hljs-number">225</span>),<span class="hljs-number">1.0</span>);
+    glEnable(GL_DEPTH_TEST);
+
+    glutSetCursor(GLUT_CURSOR_NONE);
+
+    data=stbi_load(<span class="hljs-string">"container.jpg"</span>,&amp;width,&amp;height,&amp;nrChannels, <span class="hljs-number">3</span>);
+    if (!data){
+        printf(<span class="hljs-string">"Failed to load the .jpg image<span class="hljs-subst">\n</span>"</span>);
+        exit(<span class="hljs-number">0</span>);
+    }
+    glGenTextures(<span class="hljs-number">1</span>,&amp;textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        glTexImage2D(GL_TEXTURE_2D, <span class="hljs-number">0</span>, GL_RGB, width, height, <span class="hljs-number">0</span>, GL_RGB, GL_UNSIGNED_BYTE, data);
+}
+</code></pre>
+      </header>
+    </article>
+  </div>
+  <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="dist/canvas-nest.js"></script>
+</body>
