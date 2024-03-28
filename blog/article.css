@@ -3,7 +3,7 @@ body{
   background-color: #F9F5E9;
 }
 
-nav ul{
+ul{
   position: fixed;
   top: 0;
   width: 100%;
@@ -15,11 +15,11 @@ nav ul{
   background-color: #ffcc66;
 }
 
-nav li{
+li{
   float: left;
 }
 
-nav li a{
+li a{
   display: block;
   color: #FFF;
   text-align: center;
