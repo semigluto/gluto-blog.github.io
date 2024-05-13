@@ -9,7 +9,172 @@
   <div class="main">
     <article class="article">
       <div class="content">
-<a href="/hidden-blog/ddos.webm">Click Here to see how it works</a>
+        <h3 id="this-is-index-html-">This is index.html:</h3>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Secret Chat Room<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+    * {
+      <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+      <span class="hljs-attribute">box-sizing</span>: border-box;
+    }
+
+    <span class="hljs-selector-id">#container</span> {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">1700px</span>;
+      <span class="hljs-attribute">background</span>: <span class="hljs-number">#eee</span>;
+      <span class="hljs-attribute">position</span>: relative;
+      <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">40px</span> <span class="hljs-number">40px</span> <span class="hljs-number">110px</span> <span class="hljs-number">#777</span>;
+    }
+
+    <span class="hljs-selector-class">.header</span> {
+      <span class="hljs-attribute">background</span>: <span class="hljs-number">#25421ab0</span>;
+      <span class="hljs-attribute">height</span>: <span class="hljs-number">80px</span>;
+      <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+      <span class="hljs-attribute">line-height</span>: <span class="hljs-number">68px</span>;
+      <span class="hljs-attribute">font-size</span>: <span class="hljs-number">40px</span>;
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">20px</span>;
+    }
+
+
+    <span class="hljs-selector-tag">body</span> {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+      <span class="hljs-attribute">background</span>: <span class="hljs-number">#eee</span>;
+      <span class="hljs-attribute">position</span>: relative;
+      <span class="hljs-attribute">font</span>: <span class="hljs-number">60px</span>;
+    }
+
+    <span class="hljs-selector-tag">form</span> {
+      <span class="hljs-attribute">background</span>: <span class="hljs-number">#000</span>;
+      <span class="hljs-attribute">position</span>: fixed;
+      <span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+    }
+
+    <span class="hljs-selector-tag">form</span> <span class="hljs-selector-tag">input</span> {
+      <span class="hljs-attribute">border</span>: <span class="hljs-number">0</span>;
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">80%</span>;
+      <span class="hljs-attribute">font-size</span>: <span class="hljs-number">40px</span>;
+    }
+
+    <span class="hljs-selector-tag">form</span> <span class="hljs-selector-tag">button</span> {
+      <span class="hljs-attribute">width</span>: <span class="hljs-number">20%</span>;
+      <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgb</span>(130, 224, 255);
+      <span class="hljs-attribute">border</span>: none;
+      <span class="hljs-attribute">font-size</span>: <span class="hljs-number">40px</span>;
+    }
+
+    <span class="hljs-selector-id">#messages</span> {
+      <span class="hljs-attribute">list-style-type</span>: none;
+      <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+      <span class="hljs-attribute">font-size</span>: <span class="hljs-number">40px</span>;
+    }
+
+    <span class="hljs-selector-id">#messages</span> <span class="hljs-selector-tag">li</span> {
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">5px</span> <span class="hljs-number">10px</span>;
+      <span class="hljs-attribute">font-size</span>: <span class="hljs-number">40px</span>;
+    }
+
+    <span class="hljs-selector-id">#messages</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">:nth-child(odd)</span> {
+      <span class="hljs-attribute">background</span>: <span class="hljs-number">#eee</span>;
+    }
+  </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"header"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Secret Chat Room<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"messages"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">""</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"m"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Type a message"</span> <span class="hljs-attr">autocomplete</span>=<span class="hljs-string">"off"</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Send<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/socket.io/socket.io.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">var</span> name = prompt(<span class="hljs-string">"Enter your username:"</span>);
+  <span class="hljs-keyword">var</span> socket = io()
+
+  <span class="hljs-comment">//send the username to server and change the site title</span>
+  socket.emit(<span class="hljs-string">"join"</span>, name)
+  socket.on(<span class="hljs-string">"join"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">user</span>) </span>{
+    addLine(<span class="hljs-string">"user "</span> + user + <span class="hljs-string">" joined the chat"</span>)
+  })
+
+  <span class="hljs-comment">//received message event send from the server</span>
+  socket.on(<span class="hljs-string">"message"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
+    addLine(<span class="hljs-string">"&lt;"</span> + data.name + <span class="hljs-string">"&gt;  "</span> + data.msg)
+  })
+
+  <span class="hljs-comment">//when send button pressed</span>
+  $(<span class="hljs-string">'form'</span>).submit(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> msg = $(<span class="hljs-string">"#m"</span>).val()
+    socket.emit(<span class="hljs-string">"message"</span>, {<span class="hljs-attr">name</span>: name, <span class="hljs-attr">msg</span>: msg})
+    $(<span class="hljs-string">"#m"</span>).val(<span class="hljs-string">""</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+  })
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addLine</span>(<span class="hljs-params">msg</span>) </span>{
+    $(<span class="hljs-string">'#messages'</span>).append($(<span class="hljs-string">'&lt;li&gt;'</span>).text(msg));
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<h3 id="this-is-server-js-">This is server.js:</h3>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> app = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>)();
+<span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>).Server(app);
+<span class="hljs-keyword">var</span> io = <span class="hljs-built_in">require</span>(<span class="hljs-string">'socket.io'</span>)(http);
+<span class="hljs-keyword">var</span> usocket = [];
+
+app.get(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>{
+  res.sendFile(__dirname + <span class="hljs-string">'/index.html'</span>);
+});
+
+io.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">socket</span>)</span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'a user connected'</span>)
+
+  socket.on(<span class="hljs-string">"join"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
+    usocket[name] = socket
+    io.emit(<span class="hljs-string">"join"</span>, name)
+    <span class="hljs-built_in">console</span>.log(name + <span class="hljs-string">' joined the chat'</span>)
+  })
+
+  socket.on(<span class="hljs-string">"message"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
+    io.emit(<span class="hljs-string">"message"</span>, {<span class="hljs-attr">name</span>: data.name, <span class="hljs-attr">msg</span>: data.msg})
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"&lt;"</span> + data.name + <span class="hljs-string">"&gt; "</span> + data.msg)
+  })
+
+});
+
+http.listen(<span class="hljs-number">80</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'listening on port 80'</span>);
+});
+</code></pre>
+<h2 id="how-to-use-it-">How to use it:</h2>
+<p>put the above file (index.html and server.js) to a directory</p>
+<p>open terminal, navigate to that directory</p>
+<p>Enter following command:</p>
+<pre><code class="lang-bash">sudo apt <span class="hljs-keyword">update</span>
+sudo apt <span class="hljs-keyword">install</span> nodejs npm
+sudo npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save express</span>
+sudo npm <span class="hljs-keyword">install</span> <span class="hljs-comment">--save socket.io</span>
+node server.js
+</code></pre>
+<p>Open browser and enter your ip</p>
+<p>To get your ip, enter:</p>
+<pre><code class="lang-bash"><span class="hljs-attribute">ip a</span>
+</code></pre>
+<p>or</p>
+<pre><code class="lang-bash"><span class="hljs-attribute">ifconfig</span>
+</code></pre>
+
       </div>
     </article>
   </div>
