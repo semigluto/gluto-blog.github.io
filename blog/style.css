@@ -40,19 +40,16 @@ li a{
 }
 
 .rightmain{
-  float: left;
-  margin-left: 15px;
+  margin: 0px auto;
   flex-grow: 1;
   margin-top: 80px;
 }
 
 .postlist{
-  float: left;
   width: 100%;
 }
 
 .post{
-  float: left;
   width: 100%;
   background-color: #FFFd;
   border: 0;
