@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>TheEndlessV | About The Website</title>
+  <link rel="stylesheet" href="/blog/article.css">
+</head>
+
+<body>
+  <!--navigation bar-->
+  <nav>
+    <ul>
+      <li><a class="active" href="/">Home</a></li>
+      <li><a class="active" href="/blog">Blog</a></li>
+      <li><a class="active" href="/proj">Proj</a></li>
+      <li style="float:right"><a href="/blog/about/">Cosm</a></li>
+    </ul>
+  </nav>
+
+  <div class="main">
+    <article class="article">
+      <div class="content markdown-body">
+        <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="BLOG_TCP_Socket_bettween_Server_and_Client_under_QT_0"></a>[BLOG] TCP Socket bettween Server and Client under QT</h1>
+<h2 class="code-line" data-line-start=1 data-line-end=2 ><a id="How_it_work_1"></a>How it work</h2>
+<ol>
+<li class="has-line-data" data-line-start="2" data-line-end="3">[SERVER] created a tcp server and listen (wait for any connection on port xxx)</li>
+<li class="has-line-data" data-line-start="3" data-line-end="4">[CLIENT] created a tcp socket and connected to the server through ip and port</li>
+<li class="has-line-data" data-line-start="4" data-line-end="5">[SERVER] when a new connection on the tcp server, create a tcp socket for communication</li>
+<li class="has-line-data" data-line-start="5" data-line-end="6">[SERVER] gather info about the client’s information on the socket</li>
+<li class="has-line-data" data-line-start="6" data-line-end="8">When the socket is ready, the two can send each other byte array.</li>
+</ol>
+<h2 class="code-line" data-line-start=8 data-line-end=9 ><a id="Source_code_8"></a>Source code</h2>
+<p class="has-line-data" data-line-start="9" data-line-end="10">The full source code and release is at the <a href="https://github.com/TheEndlessV/qtTCPSocket/">github qtTCPSocket</a> page</p>
+<h4 class="code-line" data-line-start=10 data-line-end=11 ><a id="ServerI_cutted_off_a_few_blank_lines_10"></a>Server(I cutted off a few blank lines):</h4>
+<pre><code class="has-line-data" data-line-start="12" data-line-end="59" class="language-cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"serverwidget.h"</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"ui_serverwidget.h"</span></span>
+
+ServerWidget::ServerWidget(QWidget *parent)
+    : QWidget(parent)
+    , ui(<span class="hljs-keyword">new</span> Ui::ServerWidget){
+    ui-&gt;setupUi(<span class="hljs-keyword">this</span>);
+    setWindowTitle(<span class="hljs-string">"Server, port: 8888"</span>);
+    tcpServer = <span class="hljs-literal">NULL</span>;tcpSocket = <span class="hljs-literal">NULL</span>;
+    tcpServer = <span class="hljs-keyword">new</span> QTcpServer(<span class="hljs-keyword">this</span>);<span class="hljs-comment">//Create Server on TCP</span>
+    tcpServer-&gt;listen(QHostAddress::Any, <span class="hljs-number">8888</span>);<span class="hljs-comment">//Listen on server using port 8888</span>
+    connect(tcpServer, &amp;QTcpServer::newConnection,<span class="hljs-comment">//when a connection between the server and client</span>
+            [=](){
+                <span class="hljs-comment">//when new connection arrived, create a socket to communicate with the client</span>
+                tcpSocket = tcpServer-&gt;nextPendingConnection();
+                QString ip = tcpSocket-&gt;peerAddress().toString();<span class="hljs-comment">//get the ip info of the client in socket</span>
+                quint16 port = tcpSocket-&gt;peerPort();<span class="hljs-comment">//get the port info of the client in socket</span>
+                QString temp = QString(<span class="hljs-string">"[%1:%2]:Connected Successfully"</span>).arg(ip).arg(port);
+                ui-&gt;textEditRead-&gt;setText(temp);
+                connect(tcpSocket, &amp;QTcpSocket::readyRead,<span class="hljs-comment">//when a connection told that the socket is ready</span>
+                        [=](){
+                            QByteArray <span class="hljs-built_in">array</span> = tcpSocket-&gt;readAll();<span class="hljs-comment">//read all the info that is sent from client</span>
+                            ui-&gt;textEditRead-&gt;append(<span class="hljs-built_in">array</span>);
+
+                        }
+                        );
+            }
+            );
+}
+
+ServerWidget::~ServerWidget(){
+    <span class="hljs-keyword">delete</span> ui;
+}
+
+<span class="hljs-keyword">void</span> ServerWidget::on_buttonSend_clicked(){
+    <span class="hljs-keyword">if</span> (tcpSocket==<span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
+    QString str = ui-&gt;textEditWrite-&gt;toPlainText();
+    tcpSocket-&gt;write(str.toUtf8().data());<span class="hljs-comment">//write to socket, as well as sending to the client</span>
+}
+
+<span class="hljs-keyword">void</span> ServerWidget::on_buttonClose_clicked(){
+    <span class="hljs-keyword">if</span> (tcpSocket==<span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span>;
+    tcpSocket-&gt;disconnectFromHost();<span class="hljs-comment">//disconnect the socket</span>
+    tcpSocket-&gt;close();<span class="hljs-comment">//close the socket</span>
+    tcpSocket = <span class="hljs-literal">NULL</span>;
+}
+</code></pre>
+<h4 class="code-line" data-line-start=59 data-line-end=60 ><a id="ClientI_cutted_off_a_few_blank_lines_59"></a>Client(I cutted off a few blank lines):</h4>
+<pre><code class="has-line-data" data-line-start="61" data-line-end="106" class="language-cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"clientwidget.h"</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"ui_clientwidget.h"</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QHostAddress&gt;</span></span>
+
+ClientWidget::ClientWidget(QWidget *parent) :
+    QWidget(parent),
+    ui(<span class="hljs-keyword">new</span> Ui::ClientWidget){
+    ui-&gt;setupUi(<span class="hljs-keyword">this</span>);
+    tcpSocket = <span class="hljs-literal">NULL</span>;
+    tcpSocket = <span class="hljs-keyword">new</span> QTcpSocket(<span class="hljs-keyword">this</span>);<span class="hljs-comment">//create a socket</span>
+    connect(tcpSocket, &amp;QTcpSocket::connected,<span class="hljs-comment">//when a socket connect</span>
+            [=](){
+                ui-&gt;textEditRead-&gt;setText(<span class="hljs-string">"Connected with server successfully"</span>);
+            }
+            );
+
+    connect(tcpSocket, &amp;QTcpSocket:: readyRead,<span class="hljs-comment">//socket is ready</span>
+            [=](){
+                QByteArray <span class="hljs-built_in">array</span> = tcpSocket-&gt;readAll();<span class="hljs-comment">//read the socket</span>
+                ui-&gt;textEditRead-&gt;append(<span class="hljs-built_in">array</span>);
+            }
+            );
+}
+
+ClientWidget::~ClientWidget(){
+    <span class="hljs-keyword">delete</span> ui;
+}
+
+<span class="hljs-keyword">void</span> ClientWidget::on_buttonConnect_clicked(){
+    QString ip = ui-&gt;lineEditIP-&gt;text();<span class="hljs-comment">//get ip</span>
+    qint16 port = ui-&gt;lineEditPort-&gt;text().toInt();<span class="hljs-comment">//get port</span>
+    tcpSocket-&gt;connectToHost(QHostAddress(ip),port);<span class="hljs-comment">//connect to the specific ip and port</span>
+}
+
+<span class="hljs-keyword">void</span> ClientWidget::on_buttonSend_clicked(){
+    QString str = ui-&gt;textEditWrite-&gt;toPlainText();
+    tcpSocket-&gt;write(str.toUtf8().data());<span class="hljs-comment">//write to socket</span>
+}
+
+<span class="hljs-keyword">void</span> ClientWidget::on_buttonClose_clicked(){
+    tcpSocket-&gt;disconnectFromHost();<span class="hljs-comment">//socket disconnect</span>
+    tcpSocket-&gt;close();<span class="hljs-comment">//socket close</span>
+    tcpSocket = <span class="hljs-literal">NULL</span>;
+}
+</code></pre>
+      </div>
+    </article>
+  </div>
+  <script src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js" type="text/javascript" opacity="0.9" count=screen.height zIndex="-1"></script>
