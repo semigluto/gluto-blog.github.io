@@ -120,6 +120,12 @@ li a{
   text-decoration: underline;
 }
 
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
 .link{
   color: #2196F3;
   text-decoration: none;
