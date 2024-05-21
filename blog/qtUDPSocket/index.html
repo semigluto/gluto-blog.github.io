@@ -1,1 +1,69 @@
 
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>TheEndlessV | About The Website</title>
+  <link rel="stylesheet" href="/blog/article.css">
+</head>
+
+<body>
+  <!--navigation bar-->
+  <nav>
+    <ul>
+      <li><a class="active" href="/">Home</a></li>
+      <li><a class="active" href="/blog">Blog</a></li>
+      <li><a class="active" href="/proj">Proj</a></li>
+      <li style="float:right"><a href="/blog/about/">Cosm</a></li>
+    </ul>
+  </nav>
+
+  <div class="main">
+    <article class="article">
+      <div class="content markdown-body">
+        <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="BLOG_UDP_Socket_under_QT_0"></a>[BLOG] UDP Socket under QT</h1>
+<h2 class="code-line" data-line-start=2 data-line-end=3 ><a id="Source_Code_2"></a>Source Code</h2>
+<p class="has-line-data" data-line-start="3" data-line-end="4"><strong>download debug code directly <a href="https://theendlessv.github.io/blog/qtUDPSocket/UDPSocketDebug.zip">here</a></strong></p>
+<h4 class="code-line" data-line-start=4 data-line-end=5 ><a id="widgetcpp_4"></a>widget.cpp:</h4>
+<pre><code class="has-line-data" data-line-start="6" data-line-end="45" class="language-cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"widget.h"</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">"ui_widget.h"</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QHostAddress&gt;</span></span>
+Widget::Widget(QWidget *parent)
+    : QWidget(parent)
+    , ui(<span class="hljs-keyword">new</span> Ui::Widget){
+    ui-&gt;setupUi(<span class="hljs-keyword">this</span>);
+    udpSocket = <span class="hljs-keyword">new</span> QUdpSocket(<span class="hljs-keyword">this</span>);
+    setWindowTitle(<span class="hljs-string">"UDP"</span>);
+    connect(udpSocket, &amp;QUdpSocket::readyRead, <span class="hljs-keyword">this</span>, &amp;Widget::dealMsg);
+}
+
+<span class="hljs-keyword">void</span> Widget::dealMsg(){
+    <span class="hljs-keyword">char</span> buf[<span class="hljs-number">1024</span>]= {<span class="hljs-number">0</span>};
+    QHostAddress cliAddr;
+    quint16 port;
+    qint16 len = udpSocket-&gt;readDatagram(buf, <span class="hljs-keyword">sizeof</span> buf, &amp;cliAddr, &amp;port);
+    <span class="hljs-keyword">if</span> (len&lt;=<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;
+    QString str = QString(<span class="hljs-string">"[%1:%2] %3"</span>).arg(cliAddr.toString()).arg(port).arg(buf);
+    ui-&gt;textEdit-&gt;setText(str);
+}
+
+Widget::~Widget(){
+    <span class="hljs-keyword">delete</span> ui;
+}
+
+<span class="hljs-keyword">void</span> Widget::on_buttonSend_clicked(){
+    QString ip = ui-&gt;lineEditIP-&gt;text();
+    qint16 port = ui-&gt;lineEditPort-&gt;text().toInt();
+    QString str = ui-&gt;textEdit-&gt;toPlainText();
+    udpSocket-&gt;writeDatagram(str.toUtf8(), QHostAddress(ip), port);
+}
+
+<span class="hljs-keyword">void</span> Widget::on_buttonSetPort_clicked(){
+    quint16 myPort = ui-&gt;lineEditMyPort-&gt;text().toInt(); <span class="hljs-comment">//udpSocket-&gt;bind(QHostAddress::AnyIPv4, myPort);</span>
+    udpSocket-&gt;bind(myPort); <span class="hljs-comment">//udpSocket-&gt;joinMulticastGroup(QHostAddress("224.0.0.2"));</span>
+}
+
+</code></pre>
+      </div>
+    </article>
+  </div>
+  <script src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js" type="text/javascript" opacity="0.9" count=screen.height zIndex="-1"></script>
