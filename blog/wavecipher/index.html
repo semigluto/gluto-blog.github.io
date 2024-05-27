@@ -21,15 +21,340 @@
     <article class="article">
       <div class="content markdown-body">
         <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="PROJ_SelfCreated_Line_Language__WaveCipher_0"></a>[PROJ] Self-Created Line Language - WaveCipher</h1>
-<p class="has-line-data" data-line-start="1" data-line-end="2">Language that can turn a line of string into a special line type.</p>
+<p class="has-line-data" data-line-start="1" data-line-end="2">A tool that can turn text into a special wave-like code.</p>
 <h5 class="code-line" data-line-start=2 data-line-end=3 ><a id="Example_2"></a>Example:</h5>
 <p class="has-line-data" data-line-start="3" data-line-end="4">Input:</p>
-<pre><code class="has-line-data" data-line-start="5" data-line-end="7">hi! nice to meet you!
+<pre><code class="has-line-data" data-line-start="5" data-line-end="7">hello!
 </code></pre>
 <p class="has-line-data" data-line-start="7" data-line-end="8">Output:</p>
-<pre><code class="has-line-data" data-line-start="9" data-line-end="13">          _                  _           _                           _        _      
-/\   _/\ / \   _ _ _   _/\ _/ \ /\ _    / \ _    _ /\ /\    _ _  /\ / \   /\ / \   _ 
-  \/|   |   \_/ | | \/|   |    |  | |\/|   | |\_/ |  |  |\/| | \/  |   |\/  |   \_/ |
+<pre><code class="has-line-data" data-line-start="9" data-line-end="13">         _    _    _       _ |
+/\   /\ / \_ / \_ / \    _/ \|
+  \/|  |    |    |   |\_/    |
+</code></pre>
+<h3 class="code-line" data-line-start=14 data-line-end=15 ><a id="About_the_generation_code_14"></a>About the generation code</h3>
+<h5 class="code-line" data-line-start=15 data-line-end=16 ><a id="Supported_characters_15"></a>Supported characters:</h5>
+<p class="has-line-data" data-line-start="16" data-line-end="17">(in frequency sequence)</p>
+<pre><code class="has-line-data" data-line-start="18" data-line-end="20"> etaoinsrhlcdumfpwgbyvkxjqz1234567890./&gt;@:()!
+</code></pre>
+<h5 class="code-line" data-line-start=20 data-line-end=21 ><a id="Generation_Rule_20"></a>Generation Rule:</h5>
+<ol>
+<li class="has-line-data" data-line-start="21" data-line-end="22">Every characters can follow up by the previous to avoid split</li>
+<li class="has-line-data" data-line-start="22" data-line-end="23">To separate different characters, we put <code>|</code> at the end of each character’s bottom line</li>
+<li class="has-line-data" data-line-start="23" data-line-end="25">For every character generated, both the starting and ending point need to be in the middle line</li>
+</ol>
+<h3 class="code-line" data-line-start=25 data-line-end=26 ><a id="Source_code_25"></a>Source code:</h3>
+<p class="has-line-data" data-line-start="26" data-line-end="29">The following code is a simple console version.<br>
+For the qt version, check the project page.<br>
+Project Page: <a href="https://github.com/tev6/waveCipher">https://github.com/tev6/waveCipher/</a></p>
+<h4 class="code-line" data-line-start=29 data-line-end=30 ><a id="Consoleversion_29"></a>Console-version:</h4>
+<pre><code class="has-line-data" data-line-start="31" data-line-end="156" class="language-cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> chs = <span class="hljs-string">" etaoinsrhlcdumfpwgbyvkxjqz1234567890./&gt;@:()!"</span>;
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; top(<span class="hljs-number">100</span>), mid(<span class="hljs-number">100</span>), bot(<span class="hljs-number">100</span>);
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; vciphons;
+<span class="hljs-keyword">int</span> tp = <span class="hljs-number">0</span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cur, <span class="hljs-keyword">int</span> pre, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> max_x)</span> </span>{
+    <span class="hljs-keyword">if</span> (x == max_x) {
+        <span class="hljs-keyword">int</span> fst = cur / <span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>, x - <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">int</span> lst = cur % <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">if</span> ((fst == <span class="hljs-number">2</span> || fst == <span class="hljs-number">4</span> || fst == <span class="hljs-number">5</span> || fst == <span class="hljs-number">7</span>) || (lst == <span class="hljs-number">1</span> || lst == <span class="hljs-number">4</span> || lst == <span class="hljs-number">6</span> || lst == <span class="hljs-number">7</span>)) <span class="hljs-keyword">return</span>;
+        vciphons.push_back(cur);
+        tp++;
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-built_in">vector</span>&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;&gt; valid_pairs = {{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>}, {<span class="hljs-number">1</span>, <span class="hljs-number">4</span>}, {<span class="hljs-number">2</span>, <span class="hljs-number">1</span>}, {<span class="hljs-number">2</span>, <span class="hljs-number">3</span>}, {<span class="hljs-number">2</span>, <span class="hljs-number">6</span>}, {<span class="hljs-number">3</span>, <span class="hljs-number">1</span>}, {<span class="hljs-number">3</span>, <span class="hljs-number">3</span>}, {<span class="hljs-number">3</span>, <span class="hljs-number">6</span>}, {<span class="hljs-number">4</span>, <span class="hljs-number">2</span>}, {<span class="hljs-number">4</span>, <span class="hljs-number">4</span>}, {<span class="hljs-number">5</span>, <span class="hljs-number">1</span>}, {<span class="hljs-number">5</span>, <span class="hljs-number">3</span>}, {<span class="hljs-number">5</span>, <span class="hljs-number">6</span>}, {<span class="hljs-number">6</span>, <span class="hljs-number">5</span>}, {<span class="hljs-number">6</span>, <span class="hljs-number">7</span>}, {<span class="hljs-number">7</span>, <span class="hljs-number">5</span>}, {<span class="hljs-number">7</span>, <span class="hljs-number">7</span>}};
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">7</span>; ++i) {
+        <span class="hljs-keyword">if</span> ((pre &gt;&gt; i) &amp; <span class="hljs-number">1</span>) <span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">if</span> (x &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">int</span> last_digit = cur % <span class="hljs-number">10</span>;
+            <span class="hljs-keyword">bool</span> is_valid = <span class="hljs-literal">false</span>;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; pair : valid_pairs) {
+                <span class="hljs-keyword">if</span> (pair.first == last_digit &amp;&amp; pair.second == i) {
+                    is_valid = <span class="hljs-literal">true</span>;
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+            <span class="hljs-keyword">if</span> (!is_valid) <span class="hljs-keyword">continue</span>;
+        }
+        dfs(cur * <span class="hljs-number">10</span> + i, pre | (<span class="hljs-number">1</span> &lt;&lt; i), x + <span class="hljs-number">1</span>, max_x);
+    }
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">drawVave</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num, <span class="hljs-keyword">int</span> x)</span> </span>{
+    top[x] = mid[x] = bot[x] = <span class="hljs-string">""</span>;
+    <span class="hljs-built_in">string</span> txt = to_string(num);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : txt) {
+        <span class="hljs-keyword">switch</span> (c) {
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'1'</span>: top[x] += <span class="hljs-string">' '</span>; mid[x] += <span class="hljs-string">'/'</span>; bot[x] += <span class="hljs-string">' '</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'2'</span>: top[x] += <span class="hljs-string">' '</span>; mid[x] += <span class="hljs-string">'\\'</span>; bot[x] += <span class="hljs-string">' '</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'3'</span>: top[x] += <span class="hljs-string">' '</span>; mid[x] += <span class="hljs-string">'_'</span>; bot[x] += <span class="hljs-string">' '</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'4'</span>: top[x] += <span class="hljs-string">'_'</span>; mid[x] += <span class="hljs-string">' '</span>; bot[x] += <span class="hljs-string">' '</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'5'</span>: top[x] += <span class="hljs-string">' '</span>; mid[x] += <span class="hljs-string">' '</span>; bot[x] += <span class="hljs-string">'/'</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'6'</span>: top[x] += <span class="hljs-string">' '</span>; mid[x] += <span class="hljs-string">' '</span>; bot[x] += <span class="hljs-string">'\\'</span>; <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'7'</span>: top[x] += <span class="hljs-string">' '</span>; mid[x] += <span class="hljs-string">' '</span>; bot[x] += <span class="hljs-string">'_'</span>; <span class="hljs-keyword">break</span>;
+        }
+    }
+    top[x] += <span class="hljs-string">' '</span>; mid[x] += <span class="hljs-string">' '</span>; bot[x] += <span class="hljs-string">'|'</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">char</span> <span class="hljs-title">defineWave</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; xtop, <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; xmid, <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; xbot)</span> </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; ++i) {
+        <span class="hljs-keyword">if</span> (top[i] == xtop &amp;&amp; mid[i] == xmid &amp;&amp; bot[i] == xbot) {
+            <span class="hljs-keyword">return</span> chs[i];
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'?'</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">generate</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> max_x = <span class="hljs-number">1</span>; max_x &lt;= <span class="hljs-number">7</span>; ++max_x) {
+        tp = <span class="hljs-number">0</span>;
+        vciphons.clear();
+        dfs(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, max_x);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; tp; ++i) {
+            drawVave(vciphons[i], cnt++);
+        }
+    }
+}
+<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">str2wave</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; input)</span> </span>{
+    <span class="hljs-built_in">string</span> result_top, result_mid, result_bot;
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; index(input.size(), -<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; input.size(); ++i) {
+        index[i] = chs.find(input[i]);
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; input.size(); ++i) result_top += top[index[i]];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; input.size(); ++i) result_mid += mid[index[i]];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; input.size(); ++i) result_bot += bot[index[i]];
+    <span class="hljs-keyword">return</span> result_top + <span class="hljs-string">"\b|\n"</span> + result_mid + <span class="hljs-string">"\b|\n"</span> + result_bot + <span class="hljs-string">'\n'</span>;
+}
+<span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">wave2str</span><span class="hljs-params">(<span class="hljs-built_in">string</span>&amp; itop, <span class="hljs-built_in">string</span>&amp; imid, <span class="hljs-built_in">string</span>&amp; ibot)</span> </span>{
+    itop[itop.size() - <span class="hljs-number">1</span>] = <span class="hljs-string">' '</span>;
+    imid[imid.size() - <span class="hljs-number">1</span>] = <span class="hljs-string">' '</span>;
+    <span class="hljs-built_in">string</span> result;
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; sep;
+    sep.push_back(-<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; ibot.length(); ++i) {
+        <span class="hljs-keyword">if</span> (ibot[i] == <span class="hljs-string">'|'</span>) sep.push_back(i);
+    }
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; sep.size() - <span class="hljs-number">1</span>; ++i) {
+        result += defineWave(itop.substr(sep[i] + <span class="hljs-number">1</span>, sep[i + <span class="hljs-number">1</span>] - sep[i]),
+                             imid.substr(sep[i] + <span class="hljs-number">1</span>, sep[i + <span class="hljs-number">1</span>] - sep[i]),
+                             ibot.substr(sep[i] + <span class="hljs-number">1</span>, sep[i + <span class="hljs-number">1</span>] - sep[i]));
+    }
+    <span class="hljs-keyword">return</span> result;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    generate();
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Choose one of the following options:\n  1. string 2 wave\n  2. wave 2 string\n  3. exit\n\nInput(1/2): "</span>;
+        <span class="hljs-keyword">int</span> opt;
+        <span class="hljs-built_in">cin</span> &gt;&gt; opt;
+        <span class="hljs-keyword">if</span> (opt == <span class="hljs-number">1</span>) {
+            <span class="hljs-built_in">string</span> input;
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"input a string: "</span>;
+            <span class="hljs-built_in">cin</span>.ignore();
+            getline(<span class="hljs-built_in">cin</span>, input);
+            <span class="hljs-built_in">cout</span> &lt;&lt; str2wave(input)&lt;&lt;endl&lt;&lt;<span class="hljs-string">"Press enter to choose again"</span>;
+            <span class="hljs-built_in">cin</span>.get();
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (opt == <span class="hljs-number">2</span>) {
+            <span class="hljs-built_in">string</span> itop, imid, ibot;
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Input the wavecipher text: \n\n"</span>;
+            <span class="hljs-built_in">cin</span>.ignore();
+            getline(<span class="hljs-built_in">cin</span>, itop);
+            getline(<span class="hljs-built_in">cin</span>, imid);
+            getline(<span class="hljs-built_in">cin</span>, ibot);
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Output: "</span> &lt;&lt; wave2str(itop, imid, ibot)&lt;&lt;endl&lt;&lt;<span class="hljs-string">"Press enter to choose again"</span>;
+            <span class="hljs-built_in">cin</span>.get();
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (opt == <span class="hljs-number">3</span>) <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">continue</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h3 class="code-line" data-line-start=157 data-line-end=158 ><a id="Dictionary_STD_157"></a>Dictionary (STD)</h3>
+<p class="has-line-data" data-line-start="158" data-line-end="159">The standard WaveCipher dictonary generated by code</p>
+<pre><code class="has-line-data" data-line-start="161" data-line-end="343">index: 0  character:  
+  
+_ 
+ |
+index: 1  character: e
+   
+/\ 
+  |
+index: 2  character: t
+   
+   
+\/|
+index: 3  character: a
+    
+/\_ 
+   |
+index: 4  character: o
+ _  
+/ \ 
+   |
+index: 5  character: i
+    
+_/\ 
+   |
+index: 6  character: n
+    
+_   
+ \/|
+index: 7  character: s
+    
+  _ 
+\/ |
+index: 8  character: r
+    
+    
+\_/|
+index: 9  character: h
+     
+/\   
+  \/|
+index: 10  character: l
+ _   
+/ \_ 
+    |
+index: 11  character: c
+  _  
+_/ \ 
+    |
+index: 12  character: d
+     
+_    
+ \_/|
+index: 13  character: u
+     
+  /\ 
+\/  |
+index: 14  character: m
+     
+   _ 
+\_/ |
+index: 15  character: f
+      
+/\_   
+   \/|
+index: 16  character: p
+      
+/\  _ 
+  \/ |
+index: 17  character: w
+      
+/\    
+  \_/|
+index: 18  character: g
+ _    
+/ \   
+   \/|
+index: 19  character: b
+      
+_/\   
+   \/|
+index: 20  character: y
+      
+_  /\ 
+ \/  |
+index: 21  character: v
+      
+  /\_ 
+\/   |
+index: 22  character: k
+   _  
+  / \ 
+\/   |
+index: 23  character: x
+      
+  _/\ 
+\/   |
+index: 24  character: j
+      
+   /\ 
+\_/  |
+index: 25  character: q
+       
+/\_    
+   \_/|
+index: 26  character: z
+       
+/\   _ 
+  \_/ |
+index: 27  character: 1
+ _     
+/ \_   
+    \/|
+index: 28  character: 2
+ _     
+/ \  _ 
+   \/ |
+index: 29  character: 3
+ _     
+/ \    
+   \_/|
+index: 30  character: 4
+       
+_/\    
+   \_/|
+index: 31  character: 5
+  _    
+_/ \   
+    \/|
+index: 32  character: 6
+    _  
+_  / \ 
+ \/   |
+index: 33  character: 7
+       
+_   /\ 
+ \_/  |
+index: 34  character: 8
+   _   
+  / \_ 
+\/    |
+index: 35  character: 9
+    _  
+  _/ \ 
+\/    |
+index: 36  character: 0
+       
+   /\_ 
+\_/   |
+index: 37  character: .
+    _  
+   / \ 
+\_/   |
+index: 38  character: /
+       
+   _/\ 
+\_/   |
+index: 39  character: &gt;
+ _      
+/ \_    
+    \_/|
+index: 40  character: @
+ _      
+/ \   _ 
+   \_/ |
+index: 41  character: :
+  _     
+_/ \    
+    \_/|
+index: 42  character: (
+     _  
+_   / \ 
+ \_/   |
+index: 43  character: )
+    _   
+   / \_ 
+\_/    |
+index: 44  character: !
+     _  
+   _/ \ 
+\_/    |
+
 </code></pre>
       </div>
     </article>
