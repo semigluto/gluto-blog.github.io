@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>TheEndlessV | 91930</title>
+  <link rel="stylesheet" href="/hidden-blog/article.css">
+</head>
+
+<body>
+  <div class="main">
+    <article class="article">
+      <div class="content markdown-body">
+        <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="Hello_0"></a>Hello</h1>
+<p class="has-line-data" data-line-start="1" data-line-end="2">I finds a lists of suspicious ip in school campus’s network</p>
+<pre><code class="has-line-data" data-line-start="3" data-line-end="5">10.29.25.125 10.29.25.154 10.29.25.181 10.29.25.183 10.29.25.203 10.29.25.252 10.29.25.253
+</code></pre>
+<p class="has-line-data" data-line-start="6" data-line-end="8">The reason these are suspicous is because they opened lots of port that shouldn’t be.<br>
+This is the nmap result for <strong>10.29.25.125</strong>:</p>
+<pre><code class="has-line-data" data-line-start="9" data-line-end="104">Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-06-07 18:11 CST
+Pre-scan script results:
+| broadcast-avahi-dos: 
+|   Discovered hosts:
+|     224.0.0.251
+|   After NULL UDP avahi packet DoS (CVE-2011-1002).
+|_  Hosts are all up (not vulnerable).
+Nmap scan report for 10.29.25.125
+Host is up (0.023s latency).
+Not shown: 994 closed tcp ports (reset)
+PORT      STATE SERVICE       VERSION
+445/tcp   open  microsoft-ds?
+631/tcp   open  ipp           CUPS 2.3
+| http-enum: 
+|   /blog/: Blog
+|   /weblog/: Blog
+|   /weblogs/: Blog
+|   /wordpress/: Blog
+|   /wiki/: Wiki
+|   /mediawiki/: Wiki
+|   /wiki/Main_Page: Wiki
+|   /tikiwiki/: Tikiwiki
+|   /cgi-bin/mj_wwwusr: Majordomo2 Mailing List
+|   /majordomo/mj_wwwusr: Majordomo2 Mailing List
+|   /j2ee/examples/servlets/: Oracle j2ee examples
+|   /j2ee/examples/jsp/: Oracle j2ee examples
+|   /dsc/: Trend Micro Data Loss Prevention Virtual Appliance
+|   /reg_1.htm: Polycom IP phone
+|   /adr.htm: Snom IP Phone
+|   /line_login.htm?l=1: Snom IP Phone
+|   /tbook.csv: Snom IP Phone
+|   /globalSIPsettings.html: Aastra IP Phone
+|   /SIPsettingsLine1.html: Aastra IP Phone
+|_  /websvn/: WEBSVN Repository
+|_http-server-header: CUPS/2.3 IPP/2.1
+|_http-aspnet-debug: ERROR: Script execution failed (use -d to debug)
+| http-phpmyadmin-dir-traversal: 
+|   VULNERABLE:
+|   phpMyAdmin grab_globals.lib.php subform Parameter Traversal Local File Inclusion
+|     State: UNKNOWN (unable to test)
+|     IDs:  CVE:CVE-2005-3299
+|       PHP file inclusion vulnerability in grab_globals.lib.php in phpMyAdmin 2.6.4 and 2.6.4-pl1 allows remote attackers to include local files via the $__redirect parameter, possibly involving the subform array.
+|       
+|     Disclosure date: 2005-10-nil
+|     Extra information:
+|       ../../../../../etc/passwd :
+|   &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+|   &lt;HTML&gt;
+|   &lt;HEAD&gt;
+|       &lt;META HTTP-EQUIV=&quot;Content-Type&quot; CONTENT=&quot;text/html; charset=utf-8&quot;&gt;
+|       &lt;TITLE&gt;\xE7\xBD\x91\xE7\xBB\x9C\xE7\x95\x8C\xE9\x9D\xA2\xE5\xB7\xB2\xE5\x81\x9C\xE7\x94\xA8 - CUPS v2.3.4&lt;/TITLE&gt;
+|       &lt;LINK REL=&quot;STYLESHEET&quot; TYPE=&quot;text/css&quot; HREF=&quot;/cups.css&quot;&gt;
+|   &lt;/HEAD&gt;
+|   &lt;BODY&gt;
+|   &lt;H1&gt;\xE7\xBD\x91\xE7\xBB\x9C\xE7\x95\x8C\xE9\x9D\xA2\xE5\xB7\xB2\xE5\x81\x9C\xE7\x94\xA8&lt;/H1&gt;
+|   &lt;P&gt;\xE7\x9B\xAE\xE5\x89\x8D\xE7\xBD\x91\xE7\xBB\x9C\xE7\x95\x8C\xE9\x9D\xA2\xE5\xB7\xB2\xE5\x81\x9C\xE7\x94\xA8\xE3\x80\x82\xE8\xBF\x90\xE8\xA1\x8C\xE2\x80\x9Ccupsctl WebInterface=yes\xE2\x80\x9D\xE6\x9D\xA5\xE5\x90\xAF\xE7\x94\xA8\xE3\x80\x82&lt;/P&gt;
+|   &lt;/BODY&gt;
+|   &lt;/HTML&gt;
+|   
+|     References:
+|       https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-3299
+|_      http://www.exploit-db.com/exploits/1244/
+| vulners: 
+|   cpe:/a:apple:cups:2.3: 
+|       OSV:CVE-2023-32324  7.5 https://vulners.com/osv/OSV:CVE-2023-32324
+|       PRION:CVE-2022-26691    7.2 https://vulners.com/prion/PRION:CVE-2022-26691
+|       OSV:CVE-2022-26691  7.2 https://vulners.com/osv/OSV:CVE-2022-26691
+|       OSV:CVE-2023-34241  7.1 https://vulners.com/osv/OSV:CVE-2023-34241
+|       OSV:CVE-2023-4504   7.0 https://vulners.com/osv/OSV:CVE-2023-4504
+|       CVE-2022-26691  6.7 https://vulners.com/cve/CVE-2022-26691
+|       PRION:CVE-2023-4504 3.7 https://vulners.com/prion/PRION:CVE-2023-4504
+|       CHAINGUARD:CVE-2023-4504    3.7 https://vulners.com/cgr/CHAINGUARD:CVE-2023-4504
+|       PRION:CVE-2023-34241    3.2 https://vulners.com/prion/PRION:CVE-2023-34241
+|       PRION:CVE-2023-32324    1.9 https://vulners.com/prion/PRION:CVE-2023-32324
+|_      CHAINGUARD:CVE-2023-32324   1.9 https://vulners.com/cgr/CHAINGUARD:CVE-2023-32324
+5000/tcp  open  rtsp          AirTunes rtspd 770.8.1
+5900/tcp  open  vnc           Apple remote desktop vnc
+7000/tcp  open  rtsp          AirTunes rtspd 770.8.1
+49157/tcp open  unknown
+MAC Address: 10:B9:C4:50:49:1C (Apple)
+Device type: general purpose
+Running: Apple macOS 11.X
+OS details: Apple macOS 11 (Big Sur) (Darwin 20.6.0)
+Network Distance: 1 hop
+Service Info: OS: Mac OS X; CPE: cpe:/o:apple:mac_os_x
+
+Host script results:
+|_smb-vuln-ms10-054: false
+|_samba-vuln-cve-2012-1182: Could not negotiate a connection:SMB: Failed to receive bytes: EOF
+|_smb-vuln-ms10-061: Could not negotiate a connection:SMB: Failed to receive bytes: EOF
+
+TRACEROUTE
+HOP RTT      ADDRESS
+1   23.03 ms 10.29.25.125
+</code></pre>
+<p class="has-line-data" data-line-start="105" data-line-end="107">As you can see, lots of ports are opened on a MacOS computer.<br>
+Luckily, this computer got so much vulnerables.</p>
+<ul>
+<li class="has-line-data" data-line-start="107" data-line-end="108">CVE-2011-1002</li>
+<li class="has-line-data" data-line-start="108" data-line-end="109">CVE-2005-3299</li>
+<li class="has-line-data" data-line-start="109" data-line-end="110">CVE-2023-32324</li>
+<li class="has-line-data" data-line-start="110" data-line-end="111">CVE-2022-26691</li>
+<li class="has-line-data" data-line-start="111" data-line-end="112">CVE-2023-34241</li>
+<li class="has-line-data" data-line-start="112" data-line-end="114">CVE-2023-4504</li>
+</ul>
+<p class="has-line-data" data-line-start="114" data-line-end="115"><strong>GOOD LUCK!</strong> Wait for my news!</p>
+
+      </div>
+    </article>
+  </div>
+  <script src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js" type="text/javascript" opacity="0.9" count="100" zIndex="-1"></script>
